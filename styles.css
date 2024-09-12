@@ -1,0 +1,585 @@
+@font-face {
+  font-family: "Robur W01 Regular";
+  src: url("./fonts/robur_w01_regular-webfont.woff2") format("woff2"), url("./fonts/robur_w01_regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --yellow: #f7c01a;
+  --brown: #371a0d;
+  --white: #fff;
+  --white-10: #ffffff10;
+  --black: #000;
+
+  --robur: "Robur W01 Regular";
+  --inter: "Inter";
+}
+
+/*reset*/
+html {
+  box-sizing: border-box;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  cursor: url("./assets/cursor-hover.png"), auto;
+}
+
+.robur-font {
+  font-family: var(--robur);
+  letter-spacing: 1px;
+}
+
+.inter-font {
+  font-family: var(--inter);
+}
+
+.inter-font {
+  font-family: var(--inter);
+}
+
+body {
+  color: var(--white);
+  background-color: var(--brown);
+  font-family: var(--inter);
+  overflow-x: hidden;
+  cursor: url("./assets/cursor.png"), auto;
+}
+
+header {
+  position: relative;
+  z-index: 100;
+  padding: 2.5rem;
+  margin: 0 9.4vw;
+  border-bottom: 1px solid var(--white-10);
+  transition: all 0.3s ease-in-out; /* Pour une transition fluide lors du scroll */
+  background-color: var(--brown);
+}
+
+header.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0; /* Supprime les marges */
+  padding: 1rem 2rem; /* Ajuste le padding si besoin pour réduire l'espace */
+  border-bottom: 1px solid var(--white-10);
+  background-color: transparent;
+  backdrop-filter: blur(30px);
+}
+
+header.fixed + main {
+  padding-top: 121px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  gap: 2rem;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+a {
+  color: var(--white);
+  text-decoration: none;
+  margin-left: 2rem;
+}
+
+a:hover {
+  cursor: url("./assets/cursor-hover.png"), auto;
+}
+
+.menu-user {
+  display: flex;
+  align-items: center;
+}
+
+.menu-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-left: 1.8rem;
+}
+
+.profile-picture {
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+}
+
+h1 {
+  font-size: 6.5rem;
+  line-height: 7rem;
+  width: 100%;
+  font-weight: 400;
+  font-family: var(--robur);
+  position: relative;
+}
+h1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 4.5rem;
+  height: 7rem;
+  background: url("./assets/minion.webp") no-repeat bottom/cover;
+  transform: translateX(33rem);
+  transform-origin: center;
+}
+h1.dialog::before {
+  content: "";
+  position: absolute;
+  bottom: 3.8rem;
+  right: -6rem;
+  width: 15.5rem;
+  height: 4rem;
+  background: url("./assets/phrase-minion.webp") no-repeat bottom/cover;
+  transform-origin: center;
+}
+
+section.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 9.4vw;
+  height: 70vh;
+}
+
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 50%;
+}
+
+.image-wrapper {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+}
+
+.image-wrapper img {
+  width: 575px;
+  position: absolute;
+  top: 0;
+}
+
+/* Animation pour sortir par le bas */
+@keyframes exit-bottom {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-3vh);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Animation pour entrer par le haut */
+@keyframes enter-top {
+  from {
+    transform: translateY(-100vh);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.image-wrapper img.exit-bottom {
+  animation: exit-bottom 0.7s ease-in forwards;
+}
+
+.image-wrapper img.enter-top {
+  animation: enter-top 0.7s ease-out forwards;
+}
+
+.image-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -18%);
+  z-index: -1;
+  width: 0;
+  height: 100%;
+  background: url("./assets/ingredient_cacaobeans.svg") no-repeat bottom/contain;
+  animation: growBehind 0.6s ease forwards;
+  animation-delay: 1s; /* L'élément apparaît après l'animation de l'image */
+}
+
+@keyframes growBehind {
+  from {
+    width: 0;
+  }
+  to {
+    width: 460px;
+  }
+}
+
+.image-wrapper .sub-image {
+  content: "";
+  position: absolute;
+  bottom: 40%;
+  right: -28%;
+  transform: rotate(45deg) translateX(110%);
+  width: 200px;
+  height: 200px;
+  transform-origin: center;
+  animation-delay: 1.2s; /* L'élément apparaît après l'élément ::before */
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0) rotate(-12deg);
+  }
+  to {
+    transform: translateX(10vw) rotate(-12deg);
+  }
+}
+
+/* Animation pour la rotation d'entrée */
+@keyframes rotateIn {
+  from {
+    transform: rotate(45deg) translateX(110%);
+  }
+  to {
+    transform: rotate(-12deg) translateX(0);
+  }
+}
+
+.sub-image.slide-out {
+  animation: slideOut 0.5s ease-in-out forwards;
+}
+
+.sub-image.rotate-in {
+  animation: rotateIn 0.5s ease-in-out forwards;
+  animation-delay: 0.5s; /* L'animation commence après l'animation de sortie */
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  line-height: 2rem;
+  margin-top: 2rem;
+  animation: fadeIn 1.5s ease forwards;
+  animation-delay: 1.5s;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dialogBtn {
+  background-color: var(--yellow);
+  color: var(--black);
+  border: 2px solid var(--black);
+  box-shadow: 0px 3px 0px 0px var(--white);
+  border-radius: 100%;
+  font-family: var(--robur);
+  font-size: 1rem;
+  line-height: 1.1rem;
+  padding: 2rem 4rem;
+  margin-top: 3rem;
+}
+.dialogBtn:hover {
+  transform: translateY(3px); /* Fait descendre le bouton de 3px */
+  box-shadow: none; /* Retire l'ombre */
+  transition: all 0.2s ease; /* Ajoute une transition douce */
+}
+
+section.products {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 80px;
+  background-color: var(--yellow);
+  padding: 3rem 9.4vw;
+}
+
+section.products::before {
+  top: -7.1rem;
+  left: 0;
+  width: 100%;
+  height: 7.1rem;
+  background-image: url("./assets/ellipse.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  content: "";
+  position: absolute;
+  z-index: 10;
+}
+
+.curved-menu {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, calc(-30% - 7.1rem));
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+  z-index: -1;
+  animation: slideIn 0.6s ease forwards;
+  animation-delay: 2.5s;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translate(-50%, calc(-30% - 7.1rem));
+  }
+  50% {
+    transform: translate(-50%, calc(-70% - 7.1rem));
+    z-index: 15;
+  }
+  100% {
+    transform: translate(-50%, calc(-50% - 7.1rem));
+    z-index: 15;
+  }
+}
+
+.curved-menu button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px 23px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  transform-origin: center; /* Inversion pour que la courbe soit vers le bas */
+  position: relative;
+  border: 1px solid var(--black);
+  font-family: var(--robur);
+  transition: all 0.4s ease-in-out;
+}
+
+.curved-menu button:not(.active):hover {
+  scale: 1.1;
+}
+
+.curved-menu button.active {
+  font-size: 1.2rem;
+  padding: 15px 29px;
+}
+
+/* Menu courbe vers le bas */
+.curved-menu button:nth-child(1) {
+  margin-top: 62px;
+  transform: rotate(-6deg);
+  background-color: #e3f7be;
+}
+
+.curved-menu button:nth-child(2) {
+  margin-top: 26px;
+  transform: rotate(-5deg);
+  background-color: #eafaff;
+}
+
+.curved-menu button:nth-child(3) {
+  margin-top: 4px;
+  transform: rotate(-3deg);
+  background-color: #e7e7e7;
+}
+
+.curved-menu button:nth-child(4) {
+  transform: rotate(0deg);
+  background-color: #eafff4;
+}
+
+.curved-menu button:nth-child(5) {
+  margin-top: 4px;
+  transform: rotate(3deg);
+  background-color: #fde5dc;
+}
+
+.curved-menu button:nth-child(6) {
+  margin-top: 26px;
+  transform: rotate(5deg);
+  background-color: #f7f8d1;
+}
+
+.curved-menu button:nth-child(7) {
+  margin-top: 62px;
+  transform: rotate(6deg);
+  background-color: #fdfdf3;
+}
+
+.infos {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.product-infos-wrapper {
+  background-color: var(--brown);
+  padding: 0.7rem;
+  border-radius: 300px 300px 0 0;
+}
+
+.product-infos-wrapper .img-wrapper {
+  border: #946d59 1px solid;
+  padding: 2rem 3rem;
+  border-radius: 300px 300px 0 0;
+}
+
+.product-infos-wrapper img {
+  width: 250px;
+}
+
+.infos-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 30vw;
+}
+
+.infos-column:last-of-type {
+  align-items: flex-end;
+}
+
+.infos-column h2 {
+  font-size: 2rem;
+  line-height: 3rem;
+  font-family: var(--robur);
+  color: var(--black);
+}
+
+.infos-column a {
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  color: var(--black);
+  font-family: var(--inter);
+  font-weight: 900;
+  margin: 0;
+}
+
+.infos-column p.text-img {
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  color: var(--black);
+  font-family: var(--robur);
+  font-weight: 900;
+  margin-top: 1rem;
+  width: 20vw;
+  text-align: justify;
+}
+
+.video-btn {
+  background-color: var(--white);
+  color: var(--black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 100px;
+  border: 1px solid var(--black);
+}
+
+.video-btn span {
+  padding: 0.8rem 2rem;
+}
+
+.video-btn .play-wrapper {
+  background-color: #ff1894;
+  padding: 1rem 2.3rem;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-btn .play-wrapper img {
+  width: 1rem;
+}
+
+.text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--black);
+  font-family: var(--robur);
+  width: 22vw;
+  line-height: 3.5rem;
+  padding-top: 3rem;
+}
+
+.highlight {
+  position: relative;
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 50px;
+  height: 30px;
+  width: 40px;
+  position: relative;
+  transform: translateY(0.3rem);
+}
+
+.highlight img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: auto;
+  vertical-align: middle;
+}
+
+.highlight.pink {
+  background-color: #f75dbd;
+}
+
+.highlight.green {
+  background-color: #0ab172;
+}
