@@ -11,15 +11,14 @@
   --white: #fff;
   --white-10: #ffffff10;
   --black: #000;
-
   --robur: "Robur W01 Regular";
   --inter: "Inter";
 }
 
-/*reset*/
 html {
   box-sizing: border-box;
 }
+
 body,
 div,
 dl,
@@ -45,6 +44,7 @@ td {
   margin: 0;
   padding: 0;
 }
+
 ul,
 ol {
   list-style: none;
@@ -57,10 +57,6 @@ button {
 .robur-font {
   font-family: var(--robur);
   letter-spacing: 1px;
-}
-
-.inter-font {
-  font-family: var(--inter);
 }
 
 .inter-font {
@@ -81,7 +77,7 @@ header {
   padding: 2.5rem;
   margin: 0 9.4vw;
   border-bottom: 1px solid var(--white-10);
-  transition: all 0.3s ease-in-out; /* Pour une transition fluide lors du scroll */
+  transition: all 0.3s ease-in-out;
   background-color: var(--brown);
 }
 
@@ -90,8 +86,8 @@ header.fixed {
   top: 0;
   left: 0;
   right: 0;
-  margin: 0; /* Supprime les marges */
-  padding: 1rem 2rem; /* Ajuste le padding si besoin pour réduire l'espace */
+  margin: 0;
+  padding: 1rem 2rem;
   border-bottom: 1px solid var(--white-10);
   background-color: transparent;
   backdrop-filter: blur(30px);
@@ -152,6 +148,7 @@ h1 {
   font-family: var(--robur);
   position: relative;
 }
+
 h1::after {
   content: "";
   position: absolute;
@@ -163,6 +160,7 @@ h1::after {
   transform: translateX(33rem);
   transform-origin: center;
 }
+
 h1.dialog::before {
   content: "";
   position: absolute;
@@ -205,7 +203,6 @@ section.hero {
   top: 0;
 }
 
-/* Animation pour sortir par le bas */
 @keyframes exit-bottom {
   0% {
     transform: translateY(0);
@@ -218,7 +215,6 @@ section.hero {
   }
 }
 
-/* Animation pour entrer par le haut */
 @keyframes enter-top {
   from {
     transform: translateY(-100vh);
@@ -247,7 +243,7 @@ section.hero {
   height: 100%;
   background: url("./assets/ingredient_cacaobeans.svg") no-repeat bottom/contain;
   animation: growBehind 0.6s ease forwards;
-  animation-delay: 1s; /* L'élément apparaît après l'animation de l'image */
+  animation-delay: 1s;
 }
 
 @keyframes growBehind {
@@ -268,7 +264,7 @@ section.hero {
   width: 200px;
   height: 200px;
   transform-origin: center;
-  animation-delay: 1.2s; /* L'élément apparaît après l'élément ::before */
+  animation-delay: 1.2s;
 }
 
 @keyframes slideOut {
@@ -280,7 +276,6 @@ section.hero {
   }
 }
 
-/* Animation pour la rotation d'entrée */
 @keyframes rotateIn {
   from {
     transform: rotate(45deg) translateX(110%);
@@ -296,7 +291,7 @@ section.hero {
 
 .sub-image.rotate-in {
   animation: rotateIn 0.5s ease-in-out forwards;
-  animation-delay: 0.5s; /* L'animation commence après l'animation de sortie */
+  animation-delay: 0.5s;
 }
 
 .subtitle {
@@ -329,10 +324,11 @@ section.hero {
   padding: 2rem 4rem;
   margin-top: 3rem;
 }
+
 .dialogBtn:hover {
-  transform: translateY(3px); /* Fait descendre le bouton de 3px */
-  box-shadow: none; /* Retire l'ombre */
-  transition: all 0.2s ease; /* Ajoute une transition douce */
+  transform: translateY(3px);
+  box-shadow: none;
+  transition: all 0.2s ease;
 }
 
 section.products {
@@ -396,7 +392,7 @@ section.products::before {
   padding: 10px 23px;
   border-radius: 100px;
   font-size: 0.8rem;
-  transform-origin: center; /* Inversion pour que la courbe soit vers le bas */
+  transform-origin: center;
   position: relative;
   border: 1px solid var(--black);
   font-family: var(--robur);
@@ -412,7 +408,6 @@ section.products::before {
   padding: 15px 29px;
 }
 
-/* Menu courbe vers le bas */
 .curved-menu button:nth-child(1) {
   margin-top: 62px;
   transform: rotate(-6deg);

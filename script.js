@@ -1,36 +1,23 @@
 window.addEventListener("scroll", function () {
   const header = document.querySelector("header");
   const scrollPosition = window.scrollY;
-
-  if (scrollPosition > 0) {
-    header.classList.add("fixed");
-  } else {
-    header.classList.remove("fixed");
-  }
+  header.classList.toggle("fixed", scrollPosition > 0);
 });
 
-// Sélectionne le bouton et l'élément h1
 const button = document.querySelector(".dialogBtn");
 const h1 = document.querySelector("h1");
 
-// Ajoute un écouteur d'événement sur le bouton
 button.addEventListener("click", function () {
-  // Ajoute la classe "dialog" à l'élément h1
   h1.classList.add("dialog");
-  setTimeout(function () {
-    // Supprime la classe "dialog" de l'élément h1
-    h1.classList.remove("dialog");
-  }, 5000);
+  setTimeout(() => h1.classList.remove("dialog"), 5000);
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Sélection des éléments
   const heroSubImage = document.querySelector(".hero .image-wrapper .sub-image");
   const heroSubtitle = document.querySelector(".hero .subtitle");
   const heroImage = document.querySelector(".hero .image-wrapper img");
   const productButtons = document.querySelectorAll(".curved-menu button");
 
-  // Créer les données des produits (description, images, etc.)
   const products = {
     "Vanilla being": {
       subtitle: "Les glaces Holy Scoops débarquent enfin en Normandie, la meilleure</br> région de France mérite les meilleures douceurs !",
@@ -69,55 +56,35 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   };
 
-  heroImage.classList.add("enter-top"); // Enlève l'animation d'entrée
-  heroSubImage.classList.add("rotate-in"); // Enlève l'animation de rotation d'entrée
+  heroImage.classList.add("enter-top");
+  heroSubImage.classList.add("rotate-in");
 
   function updateHero(productName) {
     const product = products[productName];
     if (product) {
-      // Étape 1 : Faire descendre l'image principale et faire tourner l'image secondaire
-      heroImage.classList.remove("enter-top"); // Enlève l'animation d'entrée
-      heroImage.classList.add("exit-bottom"); // Ajoute l'animation de sortie par le bas
+      heroImage.classList.replace("enter-top", "exit-bottom");
+      heroSubImage.classList.replace("rotate-in", "slide-out");
 
-      heroSubImage.classList.remove("rotate-in"); // Enlève l'animation de rotation d'entrée
-      heroSubImage.classList.add("slide-out"); // Ajoute l'animation de rotation inverse
-
-      // Étape 2 : Attendre la fin de l'animation de sortie uniquement
       heroImage.addEventListener("animationend", function onExitAnimationEnd(event) {
-        // Vérifie que l'animation terminée est bien celle de la sortie
         if (event.animationName === "exit-bottom") {
-          // Supprimer l'écouteur d'événement pour éviter qu'il se déclenche à chaque fois
           heroImage.removeEventListener("animationend", onExitAnimationEnd);
 
-          // Étape 3 : Changer l'image et le sous-titre
           heroSubtitle.innerHTML = product.subtitle;
           heroImage.src = product.image;
           heroSubImage.src = product.subImage;
 
-          // Étape 4 : Faire entrer l'image principale par le haut et faire tourner l'image secondaire dans l'autre sens
-          heroImage.classList.remove("exit-bottom"); // Retire l'animation de sortie
-          heroImage.classList.add("enter-top"); // Ajoute l'animation d'entrée par le haut
-
-          heroSubImage.classList.remove("slide-out"); // Retire l'animation de rotation inverse
-          heroSubImage.classList.add("rotate-in"); // Ajoute l'animation de rotation d'entrée
+          heroImage.classList.replace("exit-bottom", "enter-top");
+          heroSubImage.classList.replace("slide-out", "rotate-in");
         }
       });
 
-      // Met à jour la classe active des boutons
       productButtons.forEach((btn) => {
-        btn.classList.remove("active");
-        if (btn.textContent.trim() === productName) {
-          btn.classList.add("active");
-        }
+        btn.classList.toggle("active", btn.textContent.trim() === productName);
       });
     }
   }
 
-  // Ajouter un event listener pour chaque bouton produit
   productButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const productName = button.textContent;
-      updateHero(productName);
-    });
+    button.addEventListener("click", () => updateHero(button.textContent.trim()));
   });
 });
